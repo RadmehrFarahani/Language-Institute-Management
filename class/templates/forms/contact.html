@@ -1,0 +1,110 @@
+{% extends 'parent/base.html' %}
+{% block title %}تماس با ما{% endblock %}
+{% block content %}
+
+<style>
+  /* فونت و ساختار اصلی */
+  .contact-container {
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    font-family:  Tahoma, sans-serif;
+    color: #2c3e50;
+  }
+
+  .contact-container h1 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 30px;
+    color: #2980b9;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+  }
+
+  /* استایل فیلدهای فرم */
+  .contact-container form p {
+    margin-bottom: 20px;
+  }
+
+  .contact-container label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #34495e;
+  }
+
+  .contact-container input[type="text"],
+  .contact-container input[type="email"],
+  .contact-container textarea,
+  .contact-container select,
+  .contact-container input[type="number"],
+  .contact-container input[type="date"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fdfdfd;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+
+  .contact-container input:focus,
+  .contact-container textarea:focus,
+  .contact-container select:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  .contact-container textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  /* دکمه ارسال */
+  .contact-container input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+
+  .contact-container input[type="submit"]:hover {
+    background-color: #2c7ec5;
+  }
+
+  /* واکنش‌گرا */
+  @media (max-width: 600px) {
+    .contact-container {
+      padding: 25px;
+      margin: 30px 15px;
+    }
+
+    .contact-container h1 {
+      font-size: 22px;
+    }
+  }
+</style>
+
+<div class="contact-container">
+  <h1>تماس با ما</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="ارسال پیام">
+  </form>
+</div>
+
+{% endblock %}

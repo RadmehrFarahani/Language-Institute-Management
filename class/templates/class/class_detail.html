@@ -1,0 +1,80 @@
+{% extends 'parent/base.html' %}
+{% block title %}Class Info{% endblock %}
+
+{% block content %}
+<style>
+  .class-detail {
+    max-width: 700px;
+    margin: 30px auto;
+    font-family: 'Vazir', Tahoma, sans-serif;
+    color: #2c3e50;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+
+  .class-detail h1 {
+    text-align: center;
+    color: #34495e;
+    margin-bottom: 25px;
+    font-weight: 700;
+  }
+
+  .class-detail h3 {
+    color: #2980b9;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .class-detail p {
+    font-size: 17px;
+    margin: 10px 0;
+  }
+
+  .class-detail p a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .class-detail p a:hover {
+    text-decoration: underline;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 25px;
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-link:hover {
+    background-color: #1e8449;
+  }
+</style>
+
+<div class="class-detail">
+  <h1>Class Information</h1>
+  <h3>{{ detail.title }}</h3>
+  <p><strong>Language :</strong> {{ detail.language }}</p>
+  <p><strong>Level :</strong> {{ detail.level }}</p>
+  <p><strong>Teacher :</strong>
+    <a href="{% url 'class:teacher_detail' detail.teacher.id %}">{{ detail.teacher }}</a>
+  </p>
+  <p><strong>Sessions :</strong> {{ detail.sessions }}</p>
+  <p><strong>Start at :</strong> {{ detail.start }}</p>
+  <a href="{% url 'class:list_class' %}" class="back-link">Back To List</a>
+</div>
+{% endblock %}
+
+
+
+
+

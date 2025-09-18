@@ -1,0 +1,90 @@
+{% extends 'parent/base.html' %}
+{% load class_tags %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+
+<style>
+  .messages-container {
+    max-width: 800px;
+    margin: 40px auto;
+    font-family: 'Vazir', Tahoma, sans-serif;
+    color: #2c3e50;
+  }
+
+  .messages-container h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #2980b9;
+    text-align: center;
+  }
+
+  .messages-container h1 {
+    font-size: 26px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: #34495e;
+  }
+
+  .message-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .message-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .message-card h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #2c3e50;
+  }
+
+  .message-card p {
+    margin: 4px 0;
+    color: #555;
+  }
+
+  .message-card a {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #3498db;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+  }
+
+  .message-card a:hover {
+    background-color: #2d80c0;
+  }
+</style>
+
+<div class="messages-container">
+  <h1>لیست پیام‌ها</h1>
+    <h3>تعداد کل پیام‌های دریافتی: {% total_message %}</h3>
+
+  {% for contact in message %}
+    <div class="message-card">
+      <h2>{{ contact.Subject }}</h2>
+      <p><strong>نام:</strong> {{ contact.name }}</p>
+      <p><strong>ایمیل:</strong> {{ contact.email }}</p>
+      <a href="{% url 'class:contact_detail' contact.id %}">مشاهده پیام</a>
+    </div>
+  {% empty %}
+    <p style="text-align:center; color:#7f8c8d;">هیچ پیامی برای نمایش وجود ندارد.</p>
+  {% endfor %}
+
+  <!-- Pagination -->
+  {% include "partials/pagination.html" with page=classes %}
+</div>
+
+{% endblock %}
+

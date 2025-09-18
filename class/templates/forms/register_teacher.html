@@ -1,0 +1,84 @@
+{% extends 'parent/base.html' %}
+{% block title %}ثبت نام استاد جدید{% endblock %}
+{% block content %}
+
+<style>
+  .register-container {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    font-family: 'Vazir', Tahoma, sans-serif;
+    color: #2c3e50;
+  }
+
+  .register-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2980b9;
+  }
+
+  .register-container form p {
+    margin-bottom: 18px;
+  }
+
+  .register-container form label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .register-container form input[type="text"],
+  .register-container form input[type="email"],
+  .register-container form select,
+  .register-container form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+  }
+
+  .register-container form input[type="text"]:focus,
+  .register-container form input[type="email"]:focus,
+  .register-container form select:focus,
+  .register-container form textarea:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+
+  /* استایل دکمه ثبت */
+  .register-container form input[type="submit"] {
+    width: 100%;
+    padding: 12px 0;
+    background-color: #2980b9;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .register-container form input[type="submit"]:hover {
+    background-color: #2173b8;
+  }
+</style>
+
+<div class="register-container">
+  <h1>ثبت نام استاد جدید</h1>
+  <form method="POST">
+     {% csrf_token %}
+     {{ form.as_p }}
+     <input type="submit" value="ثبت درخواست">
+  </form>
+</div>
+
+{% endblock %}

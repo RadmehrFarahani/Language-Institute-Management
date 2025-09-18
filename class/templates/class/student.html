@@ -1,0 +1,75 @@
+{% extends 'parent/base.html' %}
+{% block title %}Students{% endblock %}
+{% block content %}
+<style>
+  .students-list {
+    max-width: 700px;
+    margin: 30px auto;
+    font-family: 'Vazir', Tahoma, sans-serif;
+    color: #2c3e50;
+  }
+
+  .students-list h2.main-title {
+    text-align: center;
+    color: #2980b9;
+    margin-bottom: 30px;
+    font-weight: 700;
+  }
+
+  .student-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    transition: box-shadow 0.3s ease;
+  }
+  .student-card:hover {
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+  }
+
+  .student-card h2 {
+    margin-top: 0;
+    color: #34495e;
+    font-weight: 700;
+    margin-bottom: 15px;
+  }
+
+  .student-card p {
+    margin: 6px 0;
+    font-size: 16px;
+  }
+
+  .student-card a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  .student-card a:hover {
+    color: #1c5980;
+    text-decoration: underline;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #d1d8e0;
+    margin: 25px 0;
+  }
+</style>
+
+<div class="students-list">
+  <h2 class="main-title">دانش آموزان</h2>
+  {% for student in students %}
+  <div class="student-card">
+    <h2>{{ student.name }}</h2>
+    <p>Student id : {{ student.stu_serial }}</p>
+    <p>Student Number : {{ student.number }}</p>
+    <p>Language Choice : {{ student.lang_choices }}</p>
+    <p>Student Level : {{ student.level }}</p>
+    <p>Student Class : <a href="{% url 'class:class_detail' student.class_choice.id %}">{{ student.class_choice }}</a></p>
+  </div>
+  {% endfor %}
+  {% include "partials/pagination.html" with page=students %}
+</div>
+{% endblock %}

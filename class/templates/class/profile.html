@@ -1,0 +1,166 @@
+{% extends 'parent/base.html' %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<style>
+  /* کانتینر کلی */
+  .profile-container {
+    max-width: 900px;
+    margin: 30px auto;
+    font-family: 'Vazir', Tahoma, sans-serif;
+    color: #2c3e50;
+    direction: rtl;
+  }
+
+  /* تیترهای سریع */
+  h2 {
+    color: #34495e;
+    border-bottom: 2px solid #2980b9;
+    padding-bottom: 5px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  /* لینک‌ها دسترسی سریع */
+  .quick-links p, .quick-links a {
+    font-size: 16px;
+    margin: 5px 0;
+  }
+  .quick-links a {
+    color: #2980b9;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  .quick-links a:hover {
+    color: #1c5980;
+    text-decoration: underline;
+  }
+
+  /* جداول */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid #e1e8f0;
+    font-size: 15px;
+  }
+
+  th {
+    background-color: #2980b9;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  tr:hover {
+    background-color: #f0f5fa;
+  }
+
+  /* لینک‌های داخل جدول */
+  table a {
+    color: #27ae60;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  table a:hover {
+    color: #1e8449;
+    text-decoration: underline;
+  }
+
+  /* حذف لینک ها به رنگ قرمز */
+  .delete-link {
+    color: #e74c3c;
+  }
+  .delete-link:hover {
+    color: #c0392b;
+    text-decoration: underline;
+  }
+</style>
+
+<div class="profile-container">
+  <br>
+  <h2>دسترسی سریع</h2>
+  <div class="quick-links">
+    <p><a href="{% url 'class:add_class' %}">ایجاد کلاس جدید</a></p>
+    <p><a href="{% url 'class:register_student' %}">افزودن زبان آموز</a></p>
+    <p><a href="{% url 'class:register_teacher' %}">افزودن استاد</a></p>
+    <p><a href="{% url 'class:contact_list' %}">مشاهده پیام های دریافتی</a></p>
+  </div>
+
+  <h2>اطلاعات ثبت شده</h2>
+
+  <h3>فهرست کلاس ها</h3>
+  <table>
+    <tr>
+      <th>ردیف</th>
+      <th>مشاهده</th>
+      <th>ویرایش</th>
+      <th>حذف</th>
+    </tr>
+    {% for class in class_li %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{{ class.get_absolute_url }}">{{ class.title }}</a></td>
+      <td><a href="{% url 'class:edit_class' class.id %}">ویرایش</a></td>
+      <td><a href="{% url 'class:delete_class' class.id %}" class="delete-link">حذف</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>فهرست زبان آموزان</h3>
+  <table>
+    <tr>
+      <th>ردیف</th>
+      <th>مشاهده</th>
+      <th>شماره زبان آموزی</th>
+      <th>سطح</th>
+      <th>کلاس ثبت شده</th>
+      <th>حذف</th>
+    </tr>
+    {% for std in student %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ std.name }}</td>
+      <td>{{ std.stu_serial }}</td>
+      <td>{{ std.level }}</td>
+      <td>{{ std.class_choice }}</td>
+      <td><a href="#" class="delete-link">حذف</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h3>فهرست اساتید</h3>
+  <table>
+    <tr>
+      <th>ردیف</th>
+      <th>مشاهده</th>
+      <th>ایمیل</th>
+      <th>ویرایش</th>
+      <th>حذف</th>
+    </tr>
+    {% for teach in teacher %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><a href="{{ teach.get_absolute_url }}">{{ teach.name }}</a></td>
+      <td>{{ teach.email }}</td>
+      <td><a href="#" >ویرایش</a></td>
+      <td><a href="#" class="delete-link">حذف</a></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+{% endblock %}
+
+

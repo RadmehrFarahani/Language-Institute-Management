@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>صفحه‌بندی</title>
+  <style>
+    /* کانتینر صفحه‌بندی */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 15px 0;
+      font-family: 'Vazir', Tahoma, sans-serif;
+      direction: rtl;
+    }
+
+    /* لینک‌های صفحه‌بندی */
+    .pagination a {
+      display: inline-block;
+      padding: 8px 14px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+
+    /* هاور روی لینک */
+    .pagination a:hover {
+      background-color: #2980b9;
+    }
+
+    /* صفحه فعلی (active) */
+    .pagination .active {
+      background-color: #2c3e50;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* دکمه‌های غیرفعال یا span (مثل ...) */
+    .pagination span {
+      display: inline-block;
+      padding: 8px 12px;
+      color: #7f8c8d;
+      user-select: none;
+      font-weight: 600;
+    }
+
+    /* واکنش‌گرایی */
+    @media (max-width: 480px) {
+      .pagination a, .pagination span {
+        padding: 6px 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="pagination">
+  {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}">«</a>
+
+    {% if page.number > 3 %}
+      <a href="?page=1">1</a>
+      {% if page.number > 4 %}
+        <span>...</span>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% for num in page.paginator.page_range %}
+    {% if page.number == num %}
+      <a href="?page={{ num }}" class="active">{{ num }}</a>
+    {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}
+      <a href="?page={{ num }}">{{ num }}</a>
+    {% endif %}
+  {% endfor %}
+
+  {% if page.has_next %}
+    {% if page.number < page.paginator.num_pages|add:'-3' %}
+      <span>...</span>
+      <a href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
+    {% elif page.number < page.paginator.num_pages|add:'-2' %}
+      <a href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>
+    {% endif %}
+
+    <a href="?page={{ page.next_page_number }}">»</a>
+  {% endif %}
+</div>
+
+</body>
+</html>
+
+
+
+
+
+<!--{% if page.has_previous %}-->
+<!--  <a href="?page={{ page.previous_page_number }}">«</a>-->
+
+<!--  {% if page.number > 3 %}-->
+<!--    <a href="?page=1">1</a>-->
+<!--    {% if page.number > 4 %}-->
+<!--      <span>...</span>-->
+<!--    {% endif %}-->
+<!--  {% endif %}-->
+<!--{% endif %}-->
+
+<!--{% for num in page.paginator.page_range %}-->
+<!--  {% if page.number == num %}-->
+<!--    <a href="?page={{ num }}">{{ num }}</a>-->
+<!--  {% elif num > page.number|add:'-3' and num < page.number|add:'3' %}-->
+<!--    <a href="?page={{ num }}">{{ num }}</a>-->
+<!--  {% endif %}-->
+<!--{% endfor %}-->
+
+<!--{% if page.has_next %}-->
+<!--  {% if page.number < page.paginator.num_pages|add:'-3' %}-->
+<!--    <span>...</span>-->
+<!--    <a href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>-->
+<!--  {% elif page.number < page.paginator.num_pages|add:'-2' %}-->
+<!--    <a href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a>-->
+<!--  {% endif %}-->
+
+<!--  <a href="?page={{ page.next_page_number }}">»</a>-->
+<!--{% endif %}-->

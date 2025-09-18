@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8" />
+  <title>هدر موسسه زبان - حرفه‌ای و ثابت</title>
+  <style>
+    body {
+      font-family: 'Vazir', Tahoma, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      direction: rtl;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 15px 30px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      user-select: none;
+      height: 70px;
+      overflow: hidden;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+    }
+
+    /* بخش سمت راست - نام کاربر */
+    .user-info {
+      font-size: 15px;
+      font-weight: 500;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-left: 20px;
+      width: 150px;
+      text-align: right;
+    }
+
+    /* بخش وسط - منو */
+    nav {
+      flex-shrink: 0;
+      width: 550px;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    nav ul li {
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    nav ul li a {
+      color: #ecf0f1;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 16px;
+      display: block;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      text-align: center;
+    }
+    nav ul li a:hover {
+      background-color: #34495e;
+      color: #d1d8e0;
+    }
+
+    /* بخش سمت چپ - پروفایل، ورود، خروج + فرم جستجو */
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      width: 400px; /* اندازه ثابت */
+    }
+
+    /* دکمه‌های پروفایل و ورود/خروج */
+    .profile-link {
+      background-color: #27ae60;
+      color: #ecf0f1 !important;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .profile-link:hover {
+      background-color: #1e8449;
+      color: #c1e1c1 !important;
+    }
+
+    /* فرم جستجو */
+    form.search-form {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      width: 250px;
+      height: 38px;
+    }
+    form.search-form input[type="text"] {
+      width: 180px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 15px;
+      outline-offset: 2px;
+      box-sizing: border-box;
+    }
+    form.search-form input[type="text"]:focus {
+      box-shadow: 0 0 6px 2px #3498db;
+      outline: none;
+    }
+    form.search-form input[type="submit"] {
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0 15px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      height: 38px;
+      line-height: 38px;
+      transition: background-color 0.3s ease;
+    }
+    form.search-form input[type="submit"]:hover {
+      background-color: #2980b9;
+    }
+
+    /* ریسپانسیو ساده */
+    @media (max-width: 900px) {
+      .header-container {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 20px;
+      }
+      .user-info {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+      }
+      nav {
+        width: 100%;
+        margin: 10px 0;
+      }
+      nav ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .left-section {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+      form.search-form {
+        width: 100%;
+        justify-content: center;
+      }
+      form.search-form input[type="text"] {
+        width: 70%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <!-- سمت راست: نام کاربر -->
+      {% if user.is_authenticated %}
+      <div class="user-info" aria-label="نام کاربر">کاربر: {{ user.username }}</div>
+      {% else %}
+      <div class="user-info" aria-label="نام کاربر"></div>
+      {% endif %}
+
+      <!-- وسط: منو اصلی -->
+      <nav aria-label="ناوبری اصلی">
+        <ul>
+          <li><a href="{% url 'class:list_class' %}">لیست کلاس‌ها</a></li>
+          <li><a href="{% url 'class:list_teachers' %}">لیست اساتید</a></li>
+          <li><a href="{% url 'class:list_students' %}">لیست زبان‌آموزان</a></li>
+          <li><a href="{% url 'class:contact' %}">ارسال پیام</a></li>
+        </ul>
+      </nav>
+
+      <!-- سمت چپ: فرم جستجو + دکمه‌ها -->
+      <div class="left-section" role="search">
+        {% if user.is_authenticated %}
+          <form method="get" action="{% url 'class:search' %}" class="search-form" aria-label="جستجوی کلاس">
+            <input type="text" name="query" placeholder="جستجوی کلاس" aria-label="جستجو" />
+            <input type="submit" value="جستجو" />
+          </form>
+
+          <a href="{% url 'class:profile' %}" class="profile-link">پروفایل</a>
+          <a href="{% url 'class:logout' %}" class="profile-link">خروج</a>
+        {% else %}
+          <a href="{% url 'class:login' %}" class="profile-link">ورود</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+</body>
+</html>

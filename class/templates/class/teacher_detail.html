@@ -1,0 +1,47 @@
+{% extends 'parent/base.html' %}
+{% block title %}اطلاعات استاد{% endblock %}
+
+{% block content %}
+<style>
+  .teacher-info-container {
+    max-width: 700px;
+    margin: 40px auto;
+    font-family: 'Vazir', Tahoma, sans-serif;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+    color: #2c3e50;
+  }
+
+  .teacher-info-container h1 {
+    font-weight: 700;
+    color: #2980b9;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .teacher-info-container h3 {
+    margin-top: 0;
+    font-weight: 600;
+    font-size: 22px;
+    color: #34495e;
+    margin-bottom: 15px;
+  }
+
+  .teacher-info-container p {
+    font-size: 16px;
+    margin: 8px 0;
+  }
+</style>
+
+<div class="teacher-info-container">
+  <h1>اطلاعات استاد</h1>
+  <h3>نام استاد: {{ teach_detail.name }}</h3>
+  <p>تخصص زبان: {{ teach_detail.lang_spec }}</p>
+  <p>سال‌های تجربه تدریس: {{ teach_detail.year_of_teach }}</p>
+  <p>ایمیل: {{ teach_detail.email }}</p>
+</div>
+{% endblock %}
